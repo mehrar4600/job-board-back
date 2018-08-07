@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-// var sequelize = require('../db');
+var sequelize = require('../db');
 var Student = sequelize.import('../models/student');
 
 module.exports = function(req, res, next) {

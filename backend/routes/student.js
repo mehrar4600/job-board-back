@@ -3,6 +3,7 @@ var router = express.Router();
 var models = require('../models');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
+var sequelize = require('../db');
 
 router.post('/createstudent', function(req,res){
 
