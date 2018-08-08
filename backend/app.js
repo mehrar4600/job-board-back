@@ -6,10 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var indexRouter = require('./routes/index');
 var studentRouter = require('./routes/student');
+var sMediaRouter = require('./routes/smedia');
 
 var app = express();
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -22,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./middleware/headers'));
 app.use('/', indexRouter);
 app.use('/student', studentRouter);
+app.use('/smedia', sMediaRouter);
 
 // app.use(require('./middleware/validate-session'));
 

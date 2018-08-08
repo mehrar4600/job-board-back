@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Student.associate = function(models) {
     // associations can be defined here
+    Student.hasMany(models.Smedia);
   };
   return Student;
 };
