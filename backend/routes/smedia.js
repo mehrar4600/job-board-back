@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models');
-const sMedia = require('../services/smedia');
+const sMedia = require('../services/smediaServices');
 
 router.post('/create', function(req,res){
 sm().createMedia(req.body.media)
@@ -15,6 +15,8 @@ sm().createMedia(req.body.media)
 }
 })
 })
+
+
 
 const sm = () => new sMedia();
 

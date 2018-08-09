@@ -4,15 +4,15 @@ var models = require('../models');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  // models.Student.findAll({
-    // include: [models.Job_model]
-  // }).then(function(students){
+  models.Student.findAll({
+    include: [models.Smedia]
+  }).then(function(students){
     res.render('index',{
       students:students
   
     })
   })
 
-// });
+});
 
 module.exports = router;

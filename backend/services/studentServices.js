@@ -12,11 +12,31 @@ class student {
             resume:student.resume
         })
     }
+
     signIn(student){
         return Student.findOne({
             where: { email:student.email}
         })
     }
+
+    updateStudent(student) {
+    return Student.update({
+        first_name: student.first_name,
+        last_name: student.last_name,
+        email: student.email,
+        passwordhash: bcrypt.hashSync(student.password,10),
+        resume: student.resume
+    }, {where: {email:student.email}})
 }
 
+//     deleteid(student) {
+//     return Student.destroy({
+    
+//         email: student.email,
+//         passwordhash: bcrypt.hashSync(student.password,10),
+      
+//     }, { where: { email: student.email}
+//     })
+// }
+}
 module.exports = student;

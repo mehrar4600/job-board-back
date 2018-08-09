@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var models = require('../models');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
-const Student = require("../services/student")
+const Student = require("../services/studentServices")
 
 router.post('/create', function (req, res) {
   ss().createStudent(req.body.student)
@@ -44,6 +43,31 @@ ss().signIn(req.body.student)
       }
     )
 })
+
+router.put('/update/:id', function(req,res){
+  ss().updateStudent(req.body.student)
+  .then(function updatesuccess(student){
+      res.send({
+          student:student
+      })
+  },function updateError(err){ 
+      res.send(500, err.message);
+  })
+})
+
+// router.delete('/delete/:id', function(req,res){
+//   ss().deleteid(req.body.student)
+//   .then(function deleteSuccess(student){
+//       res.send({
+//         student:student
+//       });
+//   },
+// function deleteError(err){
+//   res.send(500, err.message)
+// })
+// })
+
+
 
 
 const ss = () => new Student();

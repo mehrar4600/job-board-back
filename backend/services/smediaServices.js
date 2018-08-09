@@ -6,7 +6,8 @@ createMedia(media){
     return sMedia.create({
         linkedin:media.linkedin,
         github:media.github,
-        portfolio:media.module
+        portfolio:media.portfolio,
+        UserId:student.id
     })
 }
 }
