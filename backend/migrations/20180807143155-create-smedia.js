@@ -17,7 +17,7 @@ module.exports = {
       portfolio: {
         type: Sequelize.STRING
       },
-      UserId:{
+      StudentId:{
         type:Sequelize.INTEGER,
         onDelete:"CASCADE",
         allowNull: false,

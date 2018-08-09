@@ -3,6 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 const Student = require("../services/studentServices")
+const Students = require('../models/student')
 
 router.post('/create', function (req, res) {
   ss().createStudent(req.body.student)
@@ -55,17 +56,19 @@ router.put('/update/:id', function(req,res){
   })
 })
 
-// router.delete('/delete/:id', function(req,res){
-//   ss().deleteid(req.body.student)
-//   .then(function deleteSuccess(student){
-//       res.send({
-//         student:student
-//       });
-//   },
-// function deleteError(err){
-//   res.send(500, err.message)
-// })
-// })
+router.delete('/delete/:id', function(req,res){
+  Students.destroy({where:{id: req.params.id}})
+  .then(
+    student => {
+    res.json({
+      student:student,
+      message:"deleted"
+    })
+  },
+function deleteError(err){
+  res.send(500, err.message)
+})
+})
 
 
 

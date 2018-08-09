@@ -28,15 +28,5 @@ class student {
         resume: student.resume
     }, {where: {email:student.email}})
 }
-
-//     deleteid(student) {
-//     return Student.destroy({
-    
-//         email: student.email,
-//         passwordhash: bcrypt.hashSync(student.password,10),
-      
-//     }, { where: { email: student.email}
-//     })
-// }
 }
 module.exports = student;
