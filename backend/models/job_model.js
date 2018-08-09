@@ -7,10 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     company_name: DataTypes.STRING,
     company_site: DataTypes.STRING,
     company_address: DataTypes.STRING,
-    time: DataTypes.STRING
+    time: DataTypes.STRING,
+  
   }, {});
   Job_Model.associate = function(models) {
     // associations can be defined here
+
   };
   return Job_Model;
 };

@@ -22,7 +22,7 @@ app.use(require('./middleware/headers'));
 app.use('/', indexRouter);
 app.use('/student', studentRouter);
 
-// app.use(require('./middleware/validate-session'));
+app.use(require('./middleware/validate-session'));
 app.use ('/job', Job_ModuleRouter)
 // catch 404 and forward to error handler
 
