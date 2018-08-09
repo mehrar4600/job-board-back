@@ -28,5 +28,11 @@ class student {
         resume: student.resume
     }, {where: {email:student.email}})
 }
+
+deleteStudent(id){
+return Student.destroy({
+    where:{id:id}
+})
+}
 }
 module.exports = student;
