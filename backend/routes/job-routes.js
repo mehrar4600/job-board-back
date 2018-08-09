@@ -40,8 +40,16 @@ router.delete('/delete/:id', function(req, res){
 })
         
     
-
-
+router.put('/update/:id', function(req, res){
+    js().updateJob(req.body.job)
+    .then(function updateSuccess(job){
+        res.send({
+            job:job
+        })
+    },function updateError(err){ 
+        res.send(500, err.message);
+})
+})
 
 
 const js = () => new JobService();

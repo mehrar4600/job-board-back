@@ -18,7 +18,17 @@ class JobService {
 getAllJobs() {
     return Jobs.findAll()
 }
-   
+updateJob(job) {
+    return Jobs.update({
+        job_title: job.job_title,
+        job_description: job.job_description,
+        job_type: job.job_type,
+        company_name: job.company_name,
+        company_site:job.company_site,
+        company_address:job.company_address,
+        time:job.time
+    }, {where: {id: job.id}})
+}
 }
 
 module.exports = JobService;
