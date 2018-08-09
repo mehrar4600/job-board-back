@@ -16,7 +16,7 @@ router.post('/createstudent', function(req,res){
   models.Student.create({
     first_name: fname,last_name:lname,email:email,passwordhash:bcrypt.hashSync(password,10),resume:resume})
     .then(function success(student){
-      var token = jwt.sign({id:student.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
+      var token = jwt.sign({id:student.id, role:"student"}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
     res.json({
       student:student,
       message:"created",
@@ -35,7 +35,7 @@ router.post('/signin', function(req,res){
         if(student){
           bcrypt.compare(req.body.student.passwordhash, student.passwordhash, function(err, matches){
             if(matches){
-              var token = jwt.sign({id:student.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
+              var token = jwt.sign({id:student.id, role="student"}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
               res.json({
                 student:student,
                 message:"successfully authenticated",

@@ -12,17 +12,24 @@ module.exports = function(req, res, next) {
         else { 
             jwt.verify(sessionToken, process.env.JWT_SECRET, (err, decoded) => {
                 if(decoded){
+                    if(decoded.role === "student"){
                    Student.findOne({where: {email:decoded.email}}).then(student => {
                         req.student = student;
                         next();
                     },
                     function(){
                         res.status(401).send({error: 'Not authorized'});
-                    });
-                } else {
+                    });} else if (decoded.role === "employer"){
+                        Employer.findOne({where: {email:decoded.email}}).then(employer => {
+                            req.employer = employer;
+                            next();
+                        }, 
+                        function(){
+                            res.status(401).send({error: 'Not authorized'});
+                });} else {
                     res.status(400).send({error: 'Not authorized'});
                 }
-            });
-        }
+            };
+        })
     }
-}
+}}
