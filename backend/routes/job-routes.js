@@ -5,7 +5,7 @@ var sequelize = require('../db');
 var Job = sequelize.import('../models/job_model');
 
 router.post('/create', function (req, res) {
-    js().createJobs(req.body.job).then(
+    js().createJobs(req.body.job, req.employer.id).then(
        function success(job){
         res.json({
             job: job,
@@ -58,10 +58,10 @@ router.delete('/delete/:id', function(req, res){
         
     
 router.put('/update/:id', function(req, res){
-    js().updateJob(req.body.job)
+    js().updateJob(req.body.job, req.params.id)
     .then(function updateSuccess(job){
         res.send({
-            job:req.body.job,
+            job:job,
             message: "updated"
         })
     },function updateError(err){ 

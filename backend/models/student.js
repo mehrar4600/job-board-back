@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     passwordhash: DataTypes.STRING,
     resume: DataTypes.STRING,
-    owner: DataTypes.STRING,
-    studentId: DataTypes.INTEGER
+ 
   }, {});
   Student.associate = function(models) {
     // associations can be defined here
-    Student.hasMany(models.Job_Model)
-  };
+    Student.hasMany(models.Smedia);
+};
+
   return Student;
 };

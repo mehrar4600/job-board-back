@@ -26,9 +26,6 @@ module.exports = {
       company_address: {
         type: Sequelize.STRING
       },
-      time: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -36,15 +33,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      studentId: {
-        type:Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        allowNull: false,
-        references: {
-          model: 'Student',
-          key: "id"
-        }
       }
     });
   },

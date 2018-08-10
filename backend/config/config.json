@@ -4,7 +4,9 @@
     "password": "C@flin16",
     "database": "backend",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_data" 
   },
   "test": {
     "username": "root",
