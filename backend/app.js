@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var studentRouter = require('./routes/student');
+var employerRouter = require('./routes/employer');
 var sMediaRouter = require('./routes/smedia');
 
 var app = express();
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./middleware/headers'));
 app.use('/', indexRouter);
 app.use('/student', studentRouter);
+app.use('/employer', employerRouter)
 app.use(require('./middleware/validate-session'));
 app.use('/smedia', sMediaRouter);
 // catch 404 and forward to error handler

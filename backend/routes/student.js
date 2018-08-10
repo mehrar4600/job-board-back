@@ -48,7 +48,7 @@ ss().signIn(req.body.student)
 router.put('/update/:id', function(req,res){
   ss().updateStudent(req.body.student)
   .then(function updatesuccess(student){
-      res.send({
+      res.json({
           student:student
       })
   },function updateError(err){ 
@@ -57,9 +57,8 @@ router.put('/update/:id', function(req,res){
 })
 
 router.delete('/delete/:id', function(req,res){
-  Students.destroy({where:{id: req.params.id}})
-  .then(
-    student => {
+  ss().deleteStudent(req.params.id)
+  .then(function deletesuccess(student){
     res.json({
       student:student,
       message:"deleted"
@@ -69,9 +68,6 @@ function deleteError(err){
   res.send(500, err.message)
 })
 })
-
-
-
 
 const ss = () => new Student();
 
