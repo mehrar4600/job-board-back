@@ -27,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/student', studentRouter);
 app.use(require('./middleware/validate-session'));
 app.use('/smedia', sMediaRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req,res,next){
   var err = new Error('Not Found');

@@ -3,19 +3,17 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 const Student = require("../services/studentServices")
-const Students = require('../models/student')
 
 router.post('/create', function (req, res) {
   ss().createStudent(req.body.student)
     .then(function success(student) {
-      var token = jwt.sign({ id: student.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
+      var token = jwt.sign({ id: student.id, role:'student' }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
       res.json({
         student: student,
         message: "created",
         sessionToken: token
       }), function error(err) {
-        res.send(500, err.message);
-      }
+        res.send(500, err.message);}
     })
 })
 
@@ -25,7 +23,7 @@ ss().signIn(req.body.student)
         if (student) {
           bcrypt.compare(req.body.student.password, student.passwordhash, function (err, matches) {
             if (matches) {
-              var token = jwt.sign({ id: student.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
+              var token = jwt.sign({ id: student.id, role:'student' }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
               res.json({
                 student: student,
                 message: "successfully authenticated",
@@ -50,6 +48,7 @@ router.put('/update/:id', function(req,res){
   .then(function updatesuccess(student){
       res.json({
           student:student
+          
       })
   },function updateError(err){ 
       res.send(500, err.message);
@@ -69,6 +68,17 @@ function deleteError(err){
 })
 })
 
+router.get('/:id', function(req,res){
+  ss().getStudent(req.params.id)
+  .then(function getsuccess(student){
+    res.json({
+      student:student,
+      message:"got the student"
+    })
+  }, function gotError(err){
+    res.send(500, err.mesasage)
+  })
+})
 const ss = () => new Student();
 
 module.exports = router;
