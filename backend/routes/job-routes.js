@@ -21,6 +21,23 @@ router.get('/', (req, res) => {
     )
 })
 
+router.get('/:id', (req, res) => {
+    js().getOneJob(req.params.id).then(
+        function getJob(id){
+            res.json({
+                id: id
+            })
+        },
+         
+    err => {
+        res.json({
+            statuscode: 500, 
+            error: err.message
+        })
+    }
+)
+})
+
 
 router.delete('/delete/:id', function(req, res){
     Job.destroy({where: {id: req.params.id}}).then(
@@ -44,7 +61,8 @@ router.put('/update/:id', function(req, res){
     js().updateJob(req.body.job)
     .then(function updateSuccess(job){
         res.send({
-            job:job
+            job:req.body.job,
+            message: "updated"
         })
     },function updateError(err){ 
         res.send(500, err.message);

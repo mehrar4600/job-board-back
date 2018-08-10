@@ -1,6 +1,6 @@
 const db = require('../models/index').sequelize;
 const Jobs = db.model('Job_Model');
-
+const student = db.model('Student')
 
 class JobService {
 
@@ -18,7 +18,7 @@ class JobService {
 getAllJobs() {
     return Jobs.findAll()
 }
-updateJob(job) {
+updateJob(job, id) {
     return Jobs.update({
         job_title: job.job_title,
         job_description: job.job_description,
@@ -27,8 +27,17 @@ updateJob(job) {
         company_site:job.company_site,
         company_address:job.company_address,
         time:job.time
-    }, {where: {id: job.id}})
+    }, {where: {id:id}})
 }
+
+ getOneJob(id) {
+     return Jobs.findOne(
+         {where: {
+             id:id
+            
+         }
+         })
+ }
 }
 
 module.exports = JobService;
