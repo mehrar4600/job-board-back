@@ -5,10 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     email: DataTypes.STRING,
     passwordhash: DataTypes.STRING,
-    resume: DataTypes.STRING
+    resume: DataTypes.STRING,
+ 
   }, {});
   Student.associate = function(models) {
     // associations can be defined here
-  };
+    Student.hasMany(models.Smedia);
+};
+
   return Student;
 };

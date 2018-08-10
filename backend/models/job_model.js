@@ -7,10 +7,17 @@ module.exports = (sequelize, DataTypes) => {
     company_name: DataTypes.STRING,
     company_site: DataTypes.STRING,
     company_address: DataTypes.STRING,
-    time: DataTypes.STRING
+    EmployerId: DataTypes.INTEGER
   }, {});
   Job_Model.associate = function(models) {
     // associations can be defined here
+    Job_Model.belongsTo(models.Employer,
+    {
+      onDelete: "CASCADE",
+      foreignKey:{
+        allowNull: false
+      }
+    });
   };
   return Job_Model;
 };
