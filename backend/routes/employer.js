@@ -71,8 +71,8 @@ function deleteError(err){
 
 
 router.get('/:id', function (req,res){
-    ss().getStudent(req.params.id)
-    .then(function getsuccess(student){
+    ss().getEmployer(req.params.id)
+    .then(function getsuccess(employer){
         res.json({
             employer:employer,
             message:"got the employer"
