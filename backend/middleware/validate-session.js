@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
             jwt.verify(sessionToken, process.env.JWT_SECRET, (err, decoded) => {
                 if(decoded){
                     if(decoded.role === "student"){
-                   Student.findOne({where: {email:decoded.email}}).then(student => {
+                   StudentModel.findOne({where: {email:decoded.email}}).then(student => {
                         req.student = student;
                         next();
                     },

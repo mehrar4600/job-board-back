@@ -47,8 +47,8 @@ router.put('/update/:id', function(req,res){
   ss().updateStudent(req.body.student)
   .then(function updatesuccess(student){
       res.json({
-          student:student
-          
+        student:student,
+          message:"updated"    
       })
   },function updateError(err){ 
       res.send(500, err.message);
@@ -72,13 +72,13 @@ router.get('/:id', function(req,res){
   ss().getStudent(req.params.id)
   .then(function getsuccess(student){
     res.json({
-      student:student,
-      message:"got the student"
+      student:student
     })
   }, function gotError(err){
     res.send(500, err.mesasage)
   })
 })
+
 const ss = () => new Student();
 
 module.exports = router;
