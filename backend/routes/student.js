@@ -8,7 +8,7 @@ const Student = require("../services/studentServices")
 router.post('/create', function (req, res) {
   ss().createStudent(req.body.student)
     .then(function success(student) {
-      var token = jwt.sign({ id: student.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
+      var token = jwt.sign({ id: student.id, role: 'student' }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
       res.json({
         student: student,
         message: "created",
@@ -25,7 +25,7 @@ ss().signIn(req.body.student)
         if (student) {
           bcrypt.compare(req.body.student.password, student.passwordhash, function (err, matches) {
             if (matches) {
-              var token = jwt.sign({ id: student.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
+              var token = jwt.sign({ id: student.id, role: 'student' }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
               res.json({
                 student: student,
                 message: "successfully authenticated",
