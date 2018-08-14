@@ -18,6 +18,11 @@ class JobService {
 getAllJobs() {
     return Jobs.findAll()
 }
+getEmployerJobs(id){
+    return Jobs.findAll({
+        where: {EmployerId: id}
+    })
+}
 updateJob(job, id) {
     return Jobs.update({
         job_title: job.job_title,
@@ -27,6 +32,12 @@ updateJob(job, id) {
         company_site:job.company_site,
         company_address:job.company_address,
     }, {where: {id:id}})
+}
+
+getEmployerJob(empId, id){
+    return Jobs.findOne({
+        where: {EmployerId: empId, id: id}
+    })
 }
 
  getOneJob(id) {
