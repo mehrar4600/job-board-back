@@ -12,7 +12,7 @@ router.post('/create', function (req, res) {
             message: "created"
         })
     }
-        )
+)
 })
 
 router.get('/all/:employerId', (req, res) => {
