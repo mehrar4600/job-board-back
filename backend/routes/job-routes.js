@@ -10,11 +10,17 @@ router.post('/create', function (req, res) {
         res.json({
             job: job,
             message: "created"
-            
         })
     }
         )
 })
+
+router.get('/all/:employerId', (req, res) => {
+    js().getEmployerJobs(req.params.employerId).then(
+        (jobs) => res.json({jobs})
+    )
+})
+
 router.get('/', (req, res) => {
     js().getAllJobs().then(
         (jobs) => res.json({ jobs })
@@ -67,6 +73,12 @@ router.put('/update/:id', function(req, res){
     },function updateError(err){ 
         res.send(500, err.message);
 })
+})
+
+router.get('/:employerId/:jobId', (req, res) => {
+    js().getEmployerJob(req.params.employerId, req.params.jobId).then(
+        (job) => res.json({job})
+    )
 })
 
 
