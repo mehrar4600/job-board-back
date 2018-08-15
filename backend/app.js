@@ -5,12 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
-var indexRouter = require('./routes/index');
-var studentRouter = require('./routes/student');
-var Job_ModuleRouter = require('./routes/job-routes');
-var employerRouter = require('./routes/employer');
-var sMediaRouter = require('./routes/smedia');
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,14 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./middleware/headers'));
-app.use('/', indexRouter);
-app.use('/student', studentRouter);
-app.use('/employer', employerRouter);
-
-app.use(require('./middleware/validate-session'));
-app.use ('/job', Job_ModuleRouter);
-app.use('/smedia', sMediaRouter);
-// catch 404 and forward to error handler
+require('./routes')(app);//this redirects to the index.js file within the routes folder so all the routing is not done in this file
 app.use(function(req,res,next){
   var err = new Error('Not Found');
   err.status = 404;
