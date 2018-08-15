@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+module.exports = function(app){
 
-module.exports = router;
+app.use('/student', require('./student'));
+app.use('/employer', require('./employer'));
+
+app.use(require('../middleware/validate-session'));
+app.use ('/job', require('./job-routes'));
+app.use('/smedia', require('./smedia'));
+}
